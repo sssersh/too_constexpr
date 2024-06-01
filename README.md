@@ -27,7 +27,7 @@ constexpr auto concat_result =
 
 // It does work!
 static_assert(concat_result == "It is string which was builded as concatenation of two strings", "error");
-s
+
 
 ```
 
