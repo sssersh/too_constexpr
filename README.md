@@ -1,9 +1,9 @@
 # CANT
-## Constexpr allocations (non transient) library
+## Constexpr allocations (non transient)
 
 ---
 
-C++20-compatible library which implement constexpr non-transient allocator for standard containers.
+C++20-compatible library which implements constexpr non-transient allocator for standard containers.
 
 Now it supports **std::string** and **std::vector** (just because there is no other dynamic constexpr containers in standard library)
 
@@ -17,7 +17,7 @@ Now there is convinient way to construct strings and vectors at compile time:
 constexpr std::string_view str1 = "It is string which was builded ";
 constexpr std::string_view str2 = "as concatenation of two strings";
 
-constexpr auto concat_result_1 = 
+constexpr auto concat_result = 
     cant::too_constexpr(
         []() -> std::string
         {
@@ -25,7 +25,7 @@ constexpr auto concat_result_1 =
         }
 );
 
-// It does working!
+// It does work!
 static_assert(concat_result == "It is string which was builded as concatenation of two strings", "error");
 s
 
@@ -37,13 +37,12 @@ It's necessary to pass functional object (lambda, for example) which produce res
 
 # Limitations
 
-Lamda passed to `cant::too_constexpr` should **NOT**:
+- Lamda passed to `cant::too_constexpr` must **NOT**:
   - have any arguments (arguments with default values is possible)
   - capture any objects
 
-It should use only other constexpr objects.
-
-Nested containers e.g. `std::vector<std::string>`, now is not supported.
+- It should use only other constexpr objects.
+- Nested containers e.g. `std::vector<std::string>`, now is not supported.
 
 # Build examples
 
